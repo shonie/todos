@@ -1,0 +1,35 @@
+{
+  "name": "todos",
+  "version": "0.0.1",
+  "description": "An express application that serves data from the external resources",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run configure:env ./tests.sh",
+    "start": "npm run configure:env node ./index.js",
+    "start:dev": "npm run configure:env nodemon",
+    "configure:env": "env $(cat .env | xargs)"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shonie/todos.git"
+  },
+  "keywords": [
+    "todos",
+    "api",
+    "public",
+    "express"
+  ],
+  "author": "shonie",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shonie/todos/issues"
+  },
+  "homepage": "https://github.com/shonie/todos#readme",
+  "devDependencies": {
+    "nodemon": "^1.18.9"
+  },
+  "dependencies": {
+    "express": "^4.16.4",
+    "nconf": "^0.10.0"
+  }
+}
