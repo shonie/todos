@@ -1,4 +1,9 @@
 module.exports = (app, config) =>
-  app.use("/api/todos", (_, res) =>
-    res.redirect(307, config.get("TODOS_REMOTE_URL"))
-  );
+  app
+    .param("id", (_, __, next) => next())
+    .use("/api/todos/:id?", (req, res) =>
+      res.redirect(
+        307,
+        `${config.get("TODOS_REMOTE_URL")}/${req.params.id || ""}`
+      )
+    );

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-id=1
+id=4
 
 response=$(curl -X "DELETE" $TODOS_API_URL/$id)
 

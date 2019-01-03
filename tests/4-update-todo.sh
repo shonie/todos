@@ -2,7 +2,7 @@
 
 update="\"completed\": true"
 
-id=1
+id=3
 
 response=$(curl -d "{ $update }" -H "Content-Type: application/json" -L -X PATCH $TODOS_API_URL/$id)
 
