@@ -1,3 +1,4 @@
 module.exports = require("nconf")
   .argv()
-  .env();
+  .env()
+  .file({ file: './config.json' });
