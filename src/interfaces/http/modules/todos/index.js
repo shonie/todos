@@ -16,55 +16,51 @@ module.exports = ({ logger, repositories }) => {
 
   const deleteUseCase = todoDomain.delete(repositories.todos);
 
-  router.param("id", (_, __, next) => next());
-
-  router.get("/:id", async (req, res) => {
-    try {
-      const todo = await getUseCase.byId(req.params.id);
-      res.status(Status.OK).json(todo);
-    } catch (error) {
-      logger.error(error);
-      res.status(Status.BAD_REQUEST).json({ error });
-    }
-  });
-
-  router.get("/", async (req, res) => {
-    try {
-      const todos = await getUseCase.all();
-      res.status(Status.OK).json(todos);
-    } catch (error) {
-      logger.error(error);
-      res.status(Status.BAD_REQUEST).json({ error });
-    }
-  });
-
-  router.post("/", async (req, res) => {
-    try {
-      const todo = await postUseCase.post(req.body);
-      res.status(Status.OK).json(todo);
-    } catch (error) {
-      logger.error(error);
-      res.status(Status.BAD_REQUEST).json({ error });
-    }
-  });
-  router.patch("/:id", async (req, res) => {
-    try {
-      const todo = await patchUseCase.patch(req.body, req.params.id);
-      res.status(Status.OK).json(todo);
-    } catch (error) {
-      logger.error(error);
-      res.status(Status.BAD_REQUEST).json({ error });
-    }
-  });
-  router.delete("/", async (req, res) => {
-    try {
-      const todo = await deleteUseCase.delete(req.body);
-      res.status(Status.OK).json(todo);
-    } catch (error) {
-      logger.error(error);
-      res.status(Status.BAD_REQUEST).json({ error });
-    }
-  });
-
-  return router;
+  return router
+    .param("id", (_, __, next) => next())
+    .get("/:id", async (req, res) => {
+      try {
+        const todo = await getUseCase.byId(req.params.id);
+        res.status(Status.OK).json(todo);
+      } catch (error) {
+        logger.error(error);
+        res.status(Status.BAD_REQUEST).json({ error });
+      }
+    })
+    .get("/", async (req, res) => {
+      try {
+        const todos = await getUseCase.all();
+        res.status(Status.OK).json(todos);
+      } catch (error) {
+        logger.error(error);
+        res.status(Status.BAD_REQUEST).json({ error });
+      }
+    })
+    .post("/", async (req, res) => {
+      try {
+        const todo = await postUseCase.post(req.body);
+        res.status(Status.OK).json(todo);
+      } catch (error) {
+        logger.error(error);
+        res.status(Status.BAD_REQUEST).json({ error });
+      }
+    })
+    .patch("/:id", async (req, res) => {
+      try {
+        const todo = await patchUseCase.patch(req.body, req.params.id);
+        res.status(Status.OK).json(todo);
+      } catch (error) {
+        logger.error(error);
+        res.status(Status.BAD_REQUEST).json({ error });
+      }
+    })
+    .delete("/:id", async (req, res) => {
+      try {
+        await deleteUseCase.delete(req.params.id);
+        res.status(Status.OK);
+      } catch (error) {
+        logger.error(error);
+        res.status(Status.BAD_REQUEST).json({ error });
+      }
+    });
 };
