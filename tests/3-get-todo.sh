@@ -1,12 +1,11 @@
 #!/bin/sh
 
-id=2
+id=1
 
-expected=$(curl -H "Content-Type: application/json" $TODOS_REMOTE_URL/$id)
+expected=$(cat $PWD/fixtures/todo-$id.json)
 
 response=$(curl -L $TODOS_API_URL/$id)
 
-# This test currently fails as express compress json, and remote does not
 if [ "$response" = "$expected" ]; then
   echo "Pass. API content matches with remote."
   exit 0

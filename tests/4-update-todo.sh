@@ -6,8 +6,10 @@ id=3
 
 response=$(curl -d "{ $update }" -H "Content-Type: application/json" -L -X PATCH $TODOS_API_URL/$id)
 
+echo $response
+
 # test if a $update is a substring of $response
-if [[ "$update"=*"$response"* ]]; then
+if [[ "$response"=*"$update"* ]]; then
   echo "Pass. Todo $id was successfully updated."
   exit 0
 else
